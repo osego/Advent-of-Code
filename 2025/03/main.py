@@ -1,21 +1,20 @@
-from collections.abc import Iterable
 from functools import partial
 
 
-def parse_input() -> Iterable[list[int]]:
+def parse_input() -> map[list[int]]:
     with open("input.txt") as file:
         input_str = file.read()
     return map(list, map(partial(map, int), input_str.strip().splitlines()))
 
 
 def part_one() -> int:
-    enabled = 0
+    total = 0
     for bank in parse_input():
         tens = max(bank[:-1])
         ones = max(bank[bank.index(tens) + 1 :]) + 1
-        enabled += tens * 10 + ones
+        total += tens * 10 + ones
 
-    return enabled
+    return total
 
 
 def highest_digit(bank: list[int], start: int, end: int) -> tuple[int, int]:
